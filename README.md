@@ -1,3 +1,4 @@
+<!--
 ## Andrea Benini Personal Site
 
 This is just a placeholder now, no content here (yet). I'd like to organize my projects and place static links from this site repo. Github doesn't provide dinamic content engines but at least it's fine for a static content site, I'll keep it as it is. Content below is just a mere copy from the default theme
@@ -33,3 +34,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+-->
