@@ -1,8 +1,8 @@
-## Andrea Benini Personal Site
+## Andrea Benini Site
 
-static website
+useful links
 
 - [moebius repository](https://andreabenini.github.io/moebius/) public repository src+bin
-  * [CHANGELOG](https://raw.githubusercontent.com/andreabenini/moebius/master/CHANGELOG)
-- [erlang code](https://github.com/andreabenini/erlangCode)
+  * [CHANGELOG](https://raw.githubusercontent.com/andreabenini/moebius/master/CHANGELOG) project status
+- [erlang code](https://github.com/andreabenini/erlangCode) assorted code
 
