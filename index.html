@@ -63,6 +63,8 @@ function LoadProjects() {
 
 window.onload = LoadProjects();
 </script>
+<script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"/>
 
 </head>
 
@@ -78,6 +80,11 @@ window.onload = LoadProjects();
         </section>
       </div>
     </header>
+
+    <div class="calendar"></div>
+    <script>GitHubCalendar(".calendar", "andreabenini");</script>
+    <hr>
+
     <section id="main_content">
             <h3 id="github-public-profile-site">Here is the collection of my public repositories,
                 you can also take look at projects activities in my 
