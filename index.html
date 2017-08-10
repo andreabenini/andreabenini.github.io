@@ -21,9 +21,9 @@ function DisplayTable(Projects) {
         var CellUpdated     = Row.insertCell(2);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
         var CellCreated     = Row.insertCell(3);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
     }
-    Div = document.getElementById("ProjectList");
-    Div.innerHTML = '';
-    Div.appendChild(Table);
+    var DivProjectList = document.getElementById("ProjectList");
+    DivProjectList.innerHTML = '';
+    DivProjectList.appendChild(Table);
 }
 
 function formatDate(date) {
