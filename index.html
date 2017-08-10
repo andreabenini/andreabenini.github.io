@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,28 +41,31 @@ function LoadProjects() {
     var XMLhttp = new XMLHttpRequest();
     XMLhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var ProjectsList = JSON.parse(this.responseText);
-            var GithubProjects = [];
-            for (var i=0; i <ProjectsList.length; i++) {
-                GithubProjects.push(ProjectsList[i]);
+            var ProjectsListJSON = JSON.parse(this.responseText);
+            ProjectList = [];
+            for (var i=0; i <ProjectsListJSON.length; i++) {
+                ProjectList.push(ProjectsListJSON[i]);
             }
-            GithubProjects.sort(function(a, b) {
-                if (a.name < b.name)
-                    return -1;
-                return 1;
-            });
-            DisplayTable(GithubProjects);
-                // document.getElementById("ProjectList").innerHTML = '';
-                // for (var i=0; i < GithubProjects.length; i++) {
-                //     document.getElementById("ProjectList").innerHTML += GithubProjects[i].name+"<br/>";
-                // }
+            OrderByName();
         }
     };
     XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos", true);
     XMLhttp.send();
 }
 
+function OrderByName() {
+    ProjectList.sort(function(a, b) {
+        if (a.name < b.name)
+            return -1;
+        return 1;
+    });
+    DisplayTable(ProjectList);
+}
+
+
 window.onload = LoadProjects();
+var ProjectList = [];
+
 </script>
 <script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
 <link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"/>
@@ -82,15 +86,16 @@ window.onload = LoadProjects();
     </header>
 
     <h3 id="github-public-profile-site">Here is the collection of my public repositories,
-        you can also take look at projects activities in my 
+        you can also take look at projects activities in my
         <a href="https://github.com/andreabenini">github public profile site</a></h3>
     <div class="calendar"></div>
     <script>GitHubCalendar(".calendar", "andreabenini");</script>
     <hr>
-
+    <h4>[sort by: <a id="linkName" onclick="OrderByName();">Name</a>]</h4>
+    <hr>
     <section id="main_content">
         <div id="ProjectList"></div>
-        <h6 id="github-profile">this page is a little bit rough, and it’ll stay rude 
+        <h6 id="github-profile">this page is a little bit rough, and it’ll stay rude
             until I’ll decide to finally pickup Jekyll for some serious stuff. Until
             then please take a look at my <a href="https://github.com/andreabenini">github profile</a></h6>
     </section>
