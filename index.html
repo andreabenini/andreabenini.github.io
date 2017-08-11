@@ -98,7 +98,11 @@ function OrderByTopic() {
         }
     }
     // Ordering topics
-    ProjectTopicList.sort();
+    ProjectTopicList.sort(function(a,b) {
+        if (Object.keys(a)[0] > Object.keys(b)[0])
+            return 1;
+        return -1;
+    });
     // Ordering elements inside topics
     for (var i=0; i<ProjectTopicList.length; i++) {
         ProjectTopicList[i].sort(function(a, b) {
