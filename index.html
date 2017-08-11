@@ -59,15 +59,17 @@ function LoadProjects() {
 function DisplayTableTopics() {
     Table = DisplayClearDiv();
     var DivProjectList = document.getElementById("ProjectList");
-    for (var key in ProjectTopicList) {
-        TopicLabel = (key=='0')? 'no tags': key;
-        var Row = Table.insertRow(-1);
-        var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<strong><br/>["+TopicLabel+"]</strong>"; Cell1.style.whiteSpace = 'nowrap';
-        var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
-        var Cell3 = Row.insertCell(2); Cell3.innerHTML = "";
-        var Cell4 = Row.insertCell(3); Cell4.innerHTML = "";
-        DisplayTable(ProjectTopicList[key], Table);
-    }
+    Object.keys(ProjectTopicList).sort().forEach(function(key) {        // Topic sort order. Cannot be done inside an associative array so I'll do that in a foreach loop
+        if (ProjectTopicList[key].length > 0) {
+            var TopicLabel = (key=='0')? 'no tags': key;
+            var Row = Table.insertRow(-1);
+            var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<strong><br/>["+TopicLabel+"]</strong>"; Cell1.style.whiteSpace = 'nowrap';
+            var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
+            var Cell3 = Row.insertCell(2); Cell3.innerHTML = "";
+            var Cell4 = Row.insertCell(3); Cell4.innerHTML = "";
+            DisplayTable(ProjectTopicList[key], Table);
+        }
+    })
 }
 
 function OrderByName() {
@@ -97,12 +99,6 @@ function OrderByTopic() {
             }
         }
     }
-    // Ordering topics
-    ProjectTopicList.sort(function(a,b) {
-        if (Object.keys(a)[0] > Object.keys(b)[0])
-            return 1;
-        return -1;
-    });
     // Ordering elements inside topics
     for (var i=0; i<ProjectTopicList.length; i++) {
         ProjectTopicList[i].sort(function(a, b) {
