@@ -1,29 +1,32 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d">
+    <!-- <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d"> -->
     <title>andreabenini.github.io website</title>
 <script type="text/javascript">
-function DisplayTable(Projects) {
+function DisplayClearDiv() {
+    var DivProjectList = document.getElementById("ProjectList");
+    DivProjectList.innerHTML = '';
     var Table = document.createElement('table');
     Table.style.width='100%';
     var Row = Table.insertRow(0);
-    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<strong>Name</strong>";
-    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "<strong>Description</strong>";
-    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<strong>Modified</strong>";
-    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<strong>Created</strong>";
+    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5>Name</h5>";
+    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "<h5>Description</h5>";
+    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Modified</h5>";
+    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5>Created</h5>";
+    return Table;
+}
+function DisplayTable(Projects, Table) {
     for (var i=0; i<Projects.length; i++) {
-        var Row = Table.insertRow(i+1);
+        var Row = Table.insertRow(-1);
         var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
         var CellDescription = Row.insertCell(1);  CellDescription.innerHTML = Projects[i].description;
         var CellUpdated     = Row.insertCell(2);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
         var CellCreated     = Row.insertCell(3);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
     }
     var DivProjectList = document.getElementById("ProjectList");
-    DivProjectList.innerHTML = '';
     DivProjectList.appendChild(Table);
 }
 
@@ -50,7 +53,21 @@ function LoadProjects() {
         }
     };
     XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos", true);
+    XMLhttp.setRequestHeader('Accept', 'application/vnd.github.mercy-preview+json');    // Extra topic attributes (github experimental)
     XMLhttp.send();
+}
+function DisplayTableTopics() {
+    Table = DisplayClearDiv();
+    var DivProjectList = document.getElementById("ProjectList");
+    for (var key in ProjectTopicList) {
+        TopicLabel = (key=='0')? 'no tags': key;
+        var Row = Table.insertRow(-1);
+        var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<strong><br/>["+TopicLabel+"]</strong>"; Cell1.style.whiteSpace = 'nowrap';
+        var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
+        var Cell3 = Row.insertCell(2); Cell3.innerHTML = "";
+        var Cell4 = Row.insertCell(3); Cell4.innerHTML = "";
+        DisplayTable(ProjectTopicList[key], Table);
+    }
 }
 
 function OrderByName() {
@@ -59,12 +76,53 @@ function OrderByName() {
             return -1;
         return 1;
     });
-    DisplayTable(ProjectList);
+    Table = DisplayClearDiv();
+    DisplayTable(ProjectList, Table);
+    DisableLink('linkName');                    // Disable link
+}
+function OrderByTopic() {
+    // Topic list population
+    ProjectTopicList = [];
+    ProjectTopicList[0] = [];
+    for (var i=0; i<ProjectList.length; i++) {
+        if (ProjectList[i].topics.length==0) {
+            ProjectTopicList[0].push(ProjectList[i]);
+        } else {
+            for (var j=0; j<ProjectList[i].topics.length; j++) {
+                if (typeof(ProjectTopicList[ProjectList[i].topics[j]]) != 'object') {
+                    ProjectTopicList[ ProjectList[i].topics[j] ] = [];
+                }
+                // if (ProjectList[i].topics[j])
+                ProjectTopicList[ ProjectList[i].topics[j] ].push(ProjectList[i]);
+            }
+        }
+    }
+    // Ordering topics
+    ProjectTopicList.sort();
+    // Ordering elements inside topics
+    for (var i=0; i<ProjectTopicList.length; i++) {
+        ProjectTopicList[i].sort(function(a, b) {
+            if (a.name < b.name)
+                return -1;
+            return 1;
+        })
+    }
+    // Display
+    DisplayTableTopics();
+    DisableLink('linkTopics');          // Disable link
+}
+
+
+function DisableLink(LinkName) {
+    document.getElementById('linkName').setAttribute('href', '#');
+    document.getElementById('linkTopics').setAttribute('href', '#');
+    document.getElementById(LinkName).removeAttribute('href');
 }
 
 
 window.onload = LoadProjects();
-var ProjectList = [];
+var ProjectList = [],
+    ProjectTopicList = [];
 
 </script>
 <script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
@@ -91,7 +149,7 @@ var ProjectList = [];
     <div class="calendar"></div>
     <script>GitHubCalendar(".calendar", "andreabenini");</script>
     <hr>
-    <h4>[sort by: <a id="linkName" onclick="OrderByName();">Name</a>]</h4>
+    <h4>[sort by: <a id="linkName" href='#' onclick="OrderByName();">Name</a>, <a id="linkTopics" href='#' onclick="OrderByTopic();">Topic</a>]</h4>
     <hr>
     <section id="main_content">
         <div id="ProjectList"></div>
