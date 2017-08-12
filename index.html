@@ -26,7 +26,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d">
-    <title>andreabenini.github.io website</title>
+    <title>andreabenini.github.io</title>
 <script type="text/javascript">
 function DisplayClearDiv() {
     var DivProjectList = document.getElementById("ProjectList");
@@ -51,7 +51,6 @@ function DisplayTable(Projects, Table) {
     var DivProjectList = document.getElementById("ProjectList");
     DivProjectList.appendChild(Table);
 }
-
 function formatDate(date) {
     var d     = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -61,7 +60,6 @@ function formatDate(date) {
     if (day.length < 2) day = '0' + day;
     return [year, month, day].join('-');
 }
-
 function LoadProjects() {
     var XMLhttp = new XMLHttpRequest();
     XMLhttp.onreadystatechange = function() {
@@ -93,7 +91,6 @@ function DisplayTableTopics() {
         }
     })
 }
-
 function OrderByName() {
     ProjectList.sort(function(a, b) {
         if (a.name < b.name)
@@ -133,8 +130,6 @@ function OrderByTopic() {
     DisplayTableTopics();
     DisableLink('linkTopics');          // Disable link
 }
-
-
 function DisableLink(LinkName) {
     document.getElementById('linkName').setAttribute('href', '#');
     document.getElementById('linkTopics').setAttribute('href', '#');
@@ -155,11 +150,11 @@ var ProjectList = [],
 <body>
     <header>
       <div class="container">
-        <h1>andreabenini.github.io website</h1>
-        <h2>public code collection and hints</h2>
+        <h1>Ben's repository</h1>
+        <h2>code collection and hints</h2>
         <section id="downloads">
           <a href="https://github.com/andreabenini/andreabenini.github.io" class="btn btn-github">
-            <span class="icon"></span>View on GitHub
+            <span class="icon"></span>GitHub Console
           </a>
         </section>
       </div>
