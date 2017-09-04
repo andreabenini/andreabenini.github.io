@@ -35,18 +35,20 @@ function DisplayClearDiv() {
     Table.style.width='100%';
     var Row = Table.insertRow(0);
     var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5>Name</h5>";
-    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "<h5>Description</h5>";
-    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Modified</h5>";
-    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5>Created</h5>";
+    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
+    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
+    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5>Modified</h5>";
+    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5>Created</h5>";
     return Table;
 }
 function DisplayTable(Projects, Table) {
     for (var i=0; i<Projects.length; i++) {
         var Row = Table.insertRow(-1);
         var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
-        var CellDescription = Row.insertCell(1);  CellDescription.innerHTML = Projects[i].description;
-        var CellUpdated     = Row.insertCell(2);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
-        var CellCreated     = Row.insertCell(3);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
+        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? "<strong>*</strong>": "";
+        var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
+        var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
+        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
     }
     var DivProjectList = document.getElementById("ProjectList");
     DivProjectList.appendChild(Table);
@@ -87,6 +89,7 @@ function DisplayTableTopics() {
             var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
             var Cell3 = Row.insertCell(2); Cell3.innerHTML = "";
             var Cell4 = Row.insertCell(3); Cell4.innerHTML = "";
+            var Cell5 = Row.insertCell(4); Cell5.innerHTML = "";
             DisplayTable(ProjectTopicList[key], Table);
         }
     })
