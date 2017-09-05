@@ -45,7 +45,7 @@ function DisplayTable(Projects, Table) {
     for (var i=0; i<Projects.length; i++) {
         var Row = Table.insertRow(-1);
         var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
-        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? "<strong>*</strong>": "";
+        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
         var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
         var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
         var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
