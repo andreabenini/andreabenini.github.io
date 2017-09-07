@@ -28,31 +28,6 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d">
     <title>andreabenini.github.io</title>
 <script type="text/javascript">
-function DisplayClearDiv() {
-    var DivProjectList = document.getElementById("ProjectList");
-    DivProjectList.innerHTML = '';
-    var Table = document.createElement('table');
-    Table.style.width='100%';
-    var Row = Table.insertRow(0);
-    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a id='linkName' href='#' onclick='OrderByName();'>Name</a>  (<a id='linkTopics' href='#' onclick='OrderByTopic();'>Topic</a>)</h5>";
-    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
-    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
-    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5>Modified</h5>";
-    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5>Created</h5>";
-    return Table;
-}
-function DisplayTable(Projects, Table) {
-    for (var i=0; i<Projects.length; i++) {
-        var Row = Table.insertRow(-1);
-        var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
-        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
-        var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
-        var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
-        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
-    }
-    var DivProjectList = document.getElementById("ProjectList");
-    DivProjectList.appendChild(Table);
-}
 function formatDate(date) {
     var d     = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -77,6 +52,31 @@ function LoadProjects() {
     XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos", true);
     XMLhttp.setRequestHeader('Accept', 'application/vnd.github.mercy-preview+json');    // Extra topic attributes (github experimental)
     XMLhttp.send();
+}
+function DisplayClearDiv() {
+    var DivProjectList = document.getElementById("ProjectList");
+    DivProjectList.innerHTML = '';
+    var Table = document.createElement('table');
+    Table.style.width='100%';
+    var Row = Table.insertRow(0);
+    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a id='linkName' href='#' onclick='OrderByName();'>Name</a>  (<a id='linkTopics' href='#' onclick='OrderByTopic();'>Topic</a>)</h5>";
+    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
+    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
+    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
+    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5>Created</h5>";
+    return Table;
+}
+function DisplayTable(Projects, Table) {
+    for (var i=0; i<Projects.length; i++) {
+        var Row = Table.insertRow(-1);
+        var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
+        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
+        var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
+        var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
+        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
+    }
+    var DivProjectList = document.getElementById("ProjectList");
+    DivProjectList.appendChild(Table);
 }
 function DisplayTableTopics() {
     Table = DisplayClearDiv();
@@ -103,6 +103,16 @@ function OrderByName() {
     Table = DisplayClearDiv();
     DisplayTable(ProjectList, Table);
     DisableLink('linkName');                    // Disable link
+}
+function OrderByDateModifed() {
+    ProjectList.sort(function(a, b) {
+        if (a.updated_at < b.updated_at)
+            return -1;
+        return 1;
+    });
+    Table = DisplayClearDiv();
+    DisplayTable(ProjectList, Table);
+    DisableLink('linkDateModified');           // Disable link
 }
 function OrderByTopic() {
     // Topic list population
@@ -136,9 +146,9 @@ function OrderByTopic() {
 function DisableLink(LinkName) {
     document.getElementById('linkName').setAttribute('href', '#');
     document.getElementById('linkTopics').setAttribute('href', '#');
+    document.getElementById('linkDateModified').setAttribute('href', '#');
     document.getElementById(LinkName).removeAttribute('href');
 }
-
 
 window.onload = LoadProjects();
 var ProjectList = [],
@@ -147,9 +157,7 @@ var ProjectList = [],
 </script>
 <script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
 <link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"/>
-
 </head>
-
 <body>
     <header>
       <div class="container">
@@ -162,7 +170,6 @@ var ProjectList = [],
         </section>
       </div>
     </header>
-
     <h3 id="github-public-profile-site">Here is the collection of my public repositories,
         you can also take look at projects activities in my
         <a href="https://github.com/andreabenini">github public profile site</a></h3>
