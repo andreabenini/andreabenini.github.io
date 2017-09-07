@@ -34,7 +34,7 @@ function DisplayClearDiv() {
     var Table = document.createElement('table');
     Table.style.width='100%';
     var Row = Table.insertRow(0);
-    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5>Name</h5>";
+    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a id="linkName" href='#' onclick="OrderByName();">Name</a>  (<a id="linkTopics" href='#' onclick="OrderByTopic();">Topic</a>)</h5>";
     var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
     var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
     var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5>Modified</h5>";
@@ -168,8 +168,6 @@ var ProjectList = [],
         <a href="https://github.com/andreabenini">github public profile site</a></h3>
     <div class="calendar"></div>
     <script>GitHubCalendar(".calendar", "andreabenini");</script>
-    <hr>
-    <h4>[sort by: <a id="linkName" href='#' onclick="OrderByName();">Name</a>, <a id="linkTopics" href='#' onclick="OrderByTopic();">Topic</a>]</h4>
     <hr>
     <section id="main_content">
         <div id="ProjectList"></div>
