@@ -104,7 +104,7 @@ function OrderByName() {
     DisplayTable(ProjectList, Table);
     DisableLink('linkName');                    // Disable link
 }
-function OrderByDateModifed() {
+function OrderByDateModified() {
     ProjectList.sort(function(a, b) {
         if (a.updated_at < b.updated_at)
             return -1;
