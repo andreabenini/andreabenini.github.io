@@ -63,7 +63,7 @@ function DisplayClearDiv() {
     var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
     var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
     var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
-    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5>Created</h5>";
+    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5><a id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
     return Table;
 }
 function DisplayTable(Projects, Table) {
@@ -114,6 +114,16 @@ function OrderByDateModified() {
     DisplayTable(ProjectList, Table);
     DisableLink('linkDateModified');           // Disable link
 }
+function OrderByDateCreated() {
+    ProjectList.sort(function(a, b) {
+        if (a.created_at < b.created_at)
+            return -1;
+        return 1;
+    });
+    Table = DisplayClearDiv();
+    DisplayTable(ProjectList, Table);
+    DisableLink('linkDateCreated');           // Disable link
+}
 function OrderByTopic() {
     // Topic list population
     ProjectTopicList = [];
@@ -147,6 +157,7 @@ function DisableLink(LinkName) {
     document.getElementById('linkName').setAttribute('href', '#');
     document.getElementById('linkTopics').setAttribute('href', '#');
     document.getElementById('linkDateModified').setAttribute('href', '#');
+    document.getElementById('linkDateCreated').setAttribute('href', '#');
     document.getElementById(LinkName).removeAttribute('href');
 }
 
