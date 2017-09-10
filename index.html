@@ -27,6 +27,11 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d">
     <title>andreabenini.github.io</title>
+    <style>
+        .orderlink {
+            color: #b5e853;
+        }
+    </style>
 <script type="text/javascript">
 function formatDate(date) {
     var d     = new Date(date),
@@ -59,11 +64,11 @@ function DisplayClearDiv() {
     var Table = document.createElement('table');
     Table.style.width='100%';
     var Row = Table.insertRow(0);
-    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a id='linkName' href='#' onclick='OrderByName();'>Name</a>  (<a id='linkTopics' href='#' onclick='OrderByTopic();'>Topic</a>)</h5>";
+    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a class='orderlink' id='linkName' href='#' onclick='OrderByName();'>Name</a>  (<a class='orderlink' id='linkTopics' href='#' onclick='OrderByTopic();'>Topic</a>)</h5>";
     var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
     var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
-    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
-    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5><a id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
+    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a class='orderlink' id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
+    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5><a class='orderlink' id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
     return Table;
 }
 function DisplayTable(Projects, Table) {
