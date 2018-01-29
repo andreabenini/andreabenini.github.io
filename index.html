@@ -54,7 +54,7 @@ function LoadProjects() {
             OrderByName();
         }
     };
-    XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos", true);
+    XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos?per_page=200", true);
     XMLhttp.setRequestHeader('Accept', 'application/vnd.github.mercy-preview+json');    // Extra topic attributes (github experimental)
     XMLhttp.send();
 }
