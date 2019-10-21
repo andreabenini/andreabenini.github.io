@@ -1,204 +1,97 @@
 <!DOCTYPE html>
-<!-- /*
-    @licstart  The following is the entire license notice for the JavaScript code in this page.
-
-    LICENSE INFORMATION - Copyright (C) 2017  Andrea Benini
-
-    The JavaScript code in this page is free software: you can
-    redistribute it and/or modify it under the terms of the GNU
-    General Public License (GNU GPL) as published by the Free Software
-    Foundation, either version 3 of the License, or (at your option)
-    any later version.  The code is distributed WITHOUT ANY WARRANTY;
-    without even the implied warranty of MERCHANTABILITY or FITNESS
-    FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-    As additional permission under GNU GPL version 3 section 7, you
-    may distribute non-source (e.g., minimized or compacted) forms of
-    that code without the copy of the GNU GPL normally required by
-    section 4, provided you include this license notice and a URL
-    through which recipients can access the Corresponding Source.   
-
-
-    @licend  The above is the entire license notice for the JavaScript code in this page.
-*/ -->
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link rel="stylesheet" href="/assets/css/style.css?v=9136d5819da79504d80f465e04656308d5ced77d">
-    <title>andreabenini.github.io</title>
-    <style>
-        .orderlink {
-            color: #b5e853;
-        }
-    </style>
-<script type="text/javascript">
-function formatDate(date) {
-    var d     = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day   = '' + d.getDate(),
-        year  = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [year, month, day].join('-');
-}
-function LoadProjects() {
-    var XMLhttp = new XMLHttpRequest();
-    XMLhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var ProjectsListJSON = JSON.parse(this.responseText);
-            ProjectList = [];
-            for (var i=0; i <ProjectsListJSON.length; i++) {
-                ProjectList.push(ProjectsListJSON[i]);
-            }
-            OrderByName();
-        }
-    };
-    XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos?per_page=200", true);
-    XMLhttp.setRequestHeader('Accept', 'application/vnd.github.mercy-preview+json');    // Extra topic attributes (github experimental)
-    XMLhttp.send();
-}
-function DisplayClearDiv() {
-    var DivProjectList = document.getElementById("ProjectList");
-    DivProjectList.innerHTML = '';
-    var Table = document.createElement('table');
-    Table.style.width='100%';
-    var Row = Table.insertRow(0);
-    var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<h5><a class='orderlink' id='linkName' href='#' onclick='OrderByName();'>Name</a>  (<a class='orderlink' id='linkTopics' href='#' onclick='OrderByTopic();'>Topic</a>)</h5>";
-    var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
-    var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
-    var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a class='orderlink' id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
-    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5><a class='orderlink' id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
-    return Table;
-}
-function DisplayTable(Projects, Table) {
-    for (var i=0; i<Projects.length; i++) {
-        var Row = Table.insertRow(-1);
-        var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Projects[i].html_url+"' target=_blank>"+Projects[i].name+"</a>";
-        var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
-        var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
-        var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at); CellUpdated.style.whiteSpace = 'nowrap';
-        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
-    }
-    var DivProjectList = document.getElementById("ProjectList");
-    DivProjectList.appendChild(Table);
-}
-function DisplayTableTopics() {
-    Table = DisplayClearDiv();
-    var DivProjectList = document.getElementById("ProjectList");
-    Object.keys(ProjectTopicList).sort().forEach(function(key) {        // Topic sort order. Cannot be done inside an associative array so I'll do that in a foreach loop
-        if (ProjectTopicList[key].length > 0) {
-            var TopicLabel = (key=='0')? 'no tags': key;
-            var Row = Table.insertRow(-1);
-            var Cell1 = Row.insertCell(0); Cell1.innerHTML = "<strong><br/>["+TopicLabel+"]</strong>"; Cell1.style.whiteSpace = 'nowrap';
-            var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
-            var Cell3 = Row.insertCell(2); Cell3.innerHTML = "";
-            var Cell4 = Row.insertCell(3); Cell4.innerHTML = "";
-            var Cell5 = Row.insertCell(4); Cell5.innerHTML = "";
-            DisplayTable(ProjectTopicList[key], Table);
-        }
-    })
-}
-function OrderByName() {
-    ProjectList.sort(function(a, b) {
-        if (a.name < b.name)
-            return -1;
-        return 1;
-    });
-    Table = DisplayClearDiv();
-    DisplayTable(ProjectList, Table);
-    DisableLink('linkName');                    // Disable link
-}
-function OrderByDateModified() {
-    ProjectList.sort(function(a, b) {
-        if (a.updated_at < b.updated_at)
-            return -1;
-        return 1;
-    });
-    Table = DisplayClearDiv();
-    DisplayTable(ProjectList, Table);
-    DisableLink('linkDateModified');           // Disable link
-}
-function OrderByDateCreated() {
-    ProjectList.sort(function(a, b) {
-        if (a.created_at < b.created_at)
-            return -1;
-        return 1;
-    });
-    Table = DisplayClearDiv();
-    DisplayTable(ProjectList, Table);
-    DisableLink('linkDateCreated');           // Disable link
-}
-function OrderByTopic() {
-    // Topic list population
-    ProjectTopicList = [];
-    ProjectTopicList[0] = [];
-    for (var i=0; i<ProjectList.length; i++) {
-        if (ProjectList[i].topics.length==0) {
-            ProjectTopicList[0].push(ProjectList[i]);
-        } else {
-            for (var j=0; j<ProjectList[i].topics.length; j++) {
-                if (typeof(ProjectTopicList[ProjectList[i].topics[j]]) != 'object') {
-                    ProjectTopicList[ ProjectList[i].topics[j] ] = [];
-                }
-                // if (ProjectList[i].topics[j])
-                ProjectTopicList[ ProjectList[i].topics[j] ].push(ProjectList[i]);
-            }
-        }
-    }
-    // Ordering elements inside topics
-    for (var i=0; i<ProjectTopicList.length; i++) {
-        ProjectTopicList[i].sort(function(a, b) {
-            if (a.name < b.name)
-                return -1;
-            return 1;
-        })
-    }
-    // Display
-    DisplayTableTopics();
-    DisableLink('linkTopics');          // Disable link
-}
-function DisableLink(LinkName) {
-    document.getElementById('linkName').setAttribute('href', '#');
-    document.getElementById('linkTopics').setAttribute('href', '#');
-    document.getElementById('linkDateModified').setAttribute('href', '#');
-    document.getElementById('linkDateCreated').setAttribute('href', '#');
-    document.getElementById(LinkName).removeAttribute('href');
-}
+    <title>Ben's website</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Andrea Benini">
+    <meta name="description" content="Ben's website">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/res/bootstrap/css/bootstrap.min.css"   rel="stylesheet">   <!-- Bootstrap core CSS -->
+    <link href="/res/fontawesome/css/all.min.css"       rel="stylesheet">   <!-- FontAwesome -->
+    <link href="/theme/res/css/theme.css"               rel="stylesheet">   <!-- Custom styles for this theme -->
+    <link href="/theme/res/css/modern-business.css"     rel="stylesheet">
 
-window.onload = LoadProjects();
-var ProjectList = [],
-    ProjectTopicList = [];
+    <script src="/js/github-calendar.min.js"></script>                      <!-- github calendar -->
+    <link rel="stylesheet" href="/css/github-calendar.css" />
+    <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+    <!--<link rel="stylesheet" href="./css/github-calendar-responsive.css" />-->
 
-</script>
-<script src="./res/github-calendar.min.js"></script>
-
-<link rel="stylesheet" href="./res/github-calendar.css"/>
-<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
-<!--<link rel="stylesheet" href="./res/github-calendar-responsive.css" />-->
-
+    <!-- Projects list -->
+    <script src="/js/projectslist.js"></script>
+    <script type="text/javascript">
+        var ProjectList = [],
+        ProjectTopicList = [];
+        window.onload = LoadProjects();
+    </script>
 </head>
 <body>
-    <header>
-      <div class="container">
-        <h1>Ben's repository</h1>
-        <h2>Projects and assorted code collection</h2>
-        <section id="downloads">
-          <a href="https://github.com/andreabenini/andreabenini.github.io" class="btn btn-github">
-            <span class="icon"></span>GitHub Console
-          </a>
-        </section>
-      </div>
-    </header>
-    <h3 id="github-public-profile-site"><center>Here is the collection of my public repositories<br>
-        Projects activities on <a href="https://github.com/andreabenini">github public profile site</a></center></h3>
-    <div class="calendar"></div>
-    <script>GitHubCalendar(".calendar", "andreabenini");</script>
-    <hr>
-    <section id="main_content">
-        <div id="ProjectList"></div>
-        <h6 id="github-profile">this page is a little bit rough, and it’ll stay rude
-            until I’ll decide to finally pickup Jekyll for some serious stuff. Until
-            then please take a look at my <a href="https://github.com/andreabenini">github profile</a></h6>
-    </section>
-</body></html>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="fa fa-home" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projectActivity">Activity</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProjects"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Projects
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProjects">
+                            <a class="dropdown-item" href="#projectsList">Complete List</a>
+                            <!--
+                            <a class="dropdown-item" href="Link-2.html">Extended List</a>
+                            <a class="dropdown-item" href="Link-3.html">Pinned Projects</a>
+                            <a class="dropdown-item" href="Link-4.html">Personal Projects</a>
+                            <a class="dropdown-item" href="Link-5.html">Starred Projects</a>
+                            -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="my-4" id="projectActivity">Activity</h1>
+
+        <!-- Project Activity -->
+        <div class="row">
+            <div class="col-lg-12 mb-12">
+                <div class="calendar"></div>
+                <script>GitHubCalendar(".calendar", "andreabenini");</script>
+            </div>
+        </div>
+        <!-- /activity -->
+
+        <hr>
+
+        <!-- Projects list -->
+        <h2 id="projectsList">Projects List</h2>
+        <div class="row">
+            <div class="col-lg-12 mb-12">
+                <div id="ProjectList"></div>
+            </div>
+        </div>
+    </div> <!-- Page Content -->
+
+    <!-- Footer -->
+    <footer class="py-1 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white" style="font-style: italic">Andrea Benini 2019</p>
+        </div>
+    </footer>
+    <ul class="bubble-boxes"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/res/jquery/jquery.min.js"></script>
+    <script src="/res/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
