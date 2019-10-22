@@ -3,7 +3,7 @@
 <head>
     <title>Ben's website</title>
     <meta charset="utf-8">
-    <meta name="author" content="Andrea Benini">
+    <meta name="author"      content="Andrea Benini">
     <meta name="description" content="Ben's website">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="/res/bootstrap/css/bootstrap.min.css"   rel="stylesheet">   <!-- Bootstrap core CSS -->
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/github-calendar.css" />
     <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
     <!--<link rel="stylesheet" href="./css/github-calendar-responsive.css" />-->
+    <link href="/css/site.css" rel="stylesheet">
 
     <!-- Projects list -->
     <script src="/js/projectslist.js"></script>
@@ -37,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#projectActivity">Activity</a>
+                        <a class="nav-link" href="#menuEnd">Activity</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProjects"
@@ -59,8 +60,9 @@
             </div>
         </div>
     </nav>
+    <div id="menuEnd">&nbsp;</div>
     <!-- Page Content -->
-    <div class="container">
+    <div class="container" id="mainContainer">
         <h1 class="my-4" id="projectActivity">Activity</h1>
 
         <!-- Project Activity -->
@@ -71,22 +73,21 @@
             </div>
         </div>
         <!-- /activity -->
-
-        <hr>
-
+        <br id="projectsList"><br>&nbsp;
+        <h2>Projects List</h2><br>
+    </div> <!-- Page Content -->
         <!-- Projects list -->
-        <h2 id="projectsList">Projects List</h2>
-        <div class="row">
+        <div class="row" style="margin-right:15px; margin-left:15px;">
             <div class="col-lg-12 mb-12">
                 <div id="ProjectList"></div>
             </div>
         </div>
-    </div> <!-- Page Content -->
-
+        <br>&nbsp;
     <!-- Footer -->
     <footer class="py-1 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white" style="font-style: italic">Andrea Benini 2019</p>
+            
+            <p class="m-0 text-right text-white footerLabel">Andrea Benini 2019</p>
         </div>
     </footer>
     <ul class="bubble-boxes"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>
