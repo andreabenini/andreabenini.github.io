@@ -95,3 +95,10 @@
         border-radius: 50%;
     }
 }
+
+
+/** Footer */
+.footerLabel {
+    font-style: italic;
+    font-size: smaller;
+}
