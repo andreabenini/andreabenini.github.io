@@ -102,3 +102,29 @@
     font-style: italic;
     font-size: smaller;
 }
+
+
+/** Carousel */
+.carousel-indicators li {
+    background-color: #1475b5;
+}
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    background-size: contain;
+    -o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size: contain;
+}
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: -15px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    color: #000;
+    text-align: center;
+}

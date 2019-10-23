@@ -17,6 +17,7 @@ function LoadProjects() {
                 ProjectList.push(ProjectsListJSON[i]);
             }
             OrderByName();
+            CarouselCreate(ProjectList);
         }
     };
     XMLhttp.open("GET", "https://api.github.com/users/andreabenini/repos?per_page=200", true);
@@ -130,3 +131,43 @@ function DisableLink(LinkName) {
     document.getElementById('linkDateCreated').setAttribute('href', '#');
     document.getElementById(LinkName).removeAttribute('href');
 }
+
+
+function CarouselCreate(Projects) {
+    let ol  = document.getElementById("carousel_ol");
+    let div = document.getElementById("carousel_div");
+    let count = 0;
+    for (let i=0; i<Projects.length; i++) {
+        if (!Projects[i].fork) {
+            // Carousel OL          // <li data-target="" data-slide-to="1" class="active"></li>
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(""));
+            li.setAttribute("data-target", "#carouselIndicators");
+            li.setAttribute("data-slide", count);
+            if (count==0) {
+                li.setAttribute("class", "active");
+            } else {
+                li.setAttribute("class", "");
+            }
+            ol.appendChild(li);
+
+            // carousel DIV
+            let divInner = document.createElement("div");
+            divInner.innerHTML = "<div class='carousel-caption d-none d-md-block'><h3>"+
+                                    Projects[i].name +
+                                 "</h3><p>"+
+                                    Projects[i].description +
+                                 "</p></div>";
+            if (count==0) {
+                divInner.setAttribute("class", "carousel-item active");
+            } else {
+                divInner.setAttribute("class", "carousel-item");
+            }
+            // divInner.setAttribute("style", "background-image: url('http://placehold.it/1900x1080')");
+            divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); text-shadow: 1px 1px #0039ff");
+            div.appendChild(divInner);
+
+            count++;
+        }
+    }
+} /**/
