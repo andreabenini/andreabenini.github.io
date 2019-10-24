@@ -5,3 +5,8 @@ a {
 #projectListTable {
     margin: 0 auto;
 }
+
+.projectListCreationDate {
+    white-space: nowrap;
+    font-size: small;
+}

@@ -34,7 +34,7 @@ function DisplayClearDiv() {
     var Cell2 = Row.insertCell(1); Cell2.innerHTML = "";
     var Cell3 = Row.insertCell(2); Cell3.innerHTML = "<h5>Description</h5>";
     var Cell4 = Row.insertCell(3); Cell4.innerHTML = "<h5><a class='orderlink' id='linkDateModified' href='#' onclick='OrderByDateModified();'>Modified</a></h5>";
-    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5><a class='orderlink' id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
+    var Cell5 = Row.insertCell(4); Cell5.innerHTML = "<h5 class='projectListCreationDate'><a class='orderlink' id='linkDateCreated'  href='#' onclick='OrderByDateCreated();'>Created</a></h5>";
     return Table;
 }
 function DisplayTable(Projects, Table) {
@@ -44,7 +44,7 @@ function DisplayTable(Projects, Table) {
         var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
         var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
         var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at)+"&nbsp;&nbsp;"; CellUpdated.style.whiteSpace = 'nowrap';
-        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.style.whiteSpace = 'nowrap';
+        var CellCreated     = Row.insertCell(4);  CellCreated.innerHTML     = formatDate(Projects[i].created_at); CellCreated.setAttribute("class", "projectListCreationDate");
     }
     var DivProjectList = document.getElementById("ProjectList");
     DivProjectList.appendChild(Table);
@@ -163,10 +163,8 @@ function CarouselCreate(Projects) {
             } else {
                 divInner.setAttribute("class", "carousel-item");
             }
-            // divInner.setAttribute("style", "background-image: url('http://placehold.it/1900x1080')");
             divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); text-shadow: 1px 1px #0039ff");
             div.appendChild(divInner);
-
             count++;
         }
     }
