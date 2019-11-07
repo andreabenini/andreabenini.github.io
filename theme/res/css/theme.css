@@ -5,6 +5,7 @@
     left: 0;
     width: 100%;
     height: 40%;
+    z-index: -10;
 }
 .bubble-boxes li{
     position: absolute;
@@ -102,6 +103,11 @@
     font-style: italic;
     font-size: smaller;
 }
+.footer-absolute {
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+}
 
 
 /** Carousel */
@@ -128,3 +134,31 @@
     color: #000;
     text-align: center;
 }
+
+/** blog section */
+.blogImageDiv {
+    text-align: center;
+}
+.blogImageSpacing {
+    height: 10px;
+}
+.blogAuthor {
+    float: left;
+    font-size: small;
+    font-style: italic;
+    font-family: cursive;
+}
+.blogDate {
+    float: right;
+    font-weight: bold;
+}
+
+/* popup-modal images on blog content */
+#content img {
+    width: 100%;
+    cursor: pointer;
+}
+#content img:hover {
+    opacity: 0.6;
+}
+  

@@ -5,14 +5,19 @@
     <meta charset="utf-8">
     <meta name="author"      content="Andrea Benini">
     <meta name="description" content="Ben's website">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="/res/bootstrap/css/bootstrap.min.css"   rel="stylesheet">   <!-- Bootstrap core CSS -->
-    <link href="/res/fontawesome/css/all.min.css"       rel="stylesheet">   <!-- FontAwesome -->
-    <link href="/theme/res/css/modern-business.css"     rel="stylesheet">   <!-- Custom styles for this theme -->
-    <link href="/theme/res/css/theme.css"               rel="stylesheet">
-
+    <script src="/js/marked.js"></script>                                   <!-- Markdown renderer -->
     <script src="/js/github-calendar.min.js"></script>                      <!-- github calendar -->
+    <link rel="stylesheet" href="/css/site.css" />
     <link rel="stylesheet" href="/css/github-calendar.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/res/bootstrap/css/bootstrap.min.css"   rel="stylesheet">   <!-- Bootstrap core CSS             -->
+    <link href="/res/fontawesome/css/all.min.css"       rel="stylesheet">   <!-- FontAwesome                    -->
+    <link href="/theme/res/css/modern-business.css"     rel="stylesheet">   <!-- Custom styles for this theme   -->
+    <link href="/theme/res/css/theme.css"               rel="stylesheet">   <!-- Current theme css              -->
+
+    <script src="/res/jquery/jquery.min.js"></script>                       <!-- jquery                         -->
+    <script src="/res/bootstrap/js/bootstrap.bundle.min.js"></script>       <!-- Bootstrap                      -->
     <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
     <!--<link rel="stylesheet" href="./css/github-calendar-responsive.css" />-->
     <link href="/css/site.css" rel="stylesheet">
@@ -90,7 +95,7 @@
         </div>
         <!-- /activity -->
         <br id="projectsList"><br>&nbsp;
-        <h2>Projects List</h2><br>
+        <h2>Projects List</h2>
     </div> <!-- Page Content -->
         <!-- Projects list -->
         <div class="row" style="margin-right:15px; margin-left:15px;">
@@ -98,7 +103,26 @@
                 <div id="ProjectList"></div>
             </div>
         </div>
-        <br>&nbsp;
+        <br>&nbsp;        <div class="container" id="mainContainer">
+            <!-- Featured project -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <p id="featuredProjectTitle"><strong>Featured Project</strong></p>
+                </div>
+            </div>
+            <div class="row" id="featuredProject" onclick="javascript:window.location='PCBen'; return false;">
+                    <div class="col-lg-10">
+                        <h2>PCBen</h2>
+                        <p>Poor man diy PCB milling machine with scrap parts</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <img class="img-fluid rounded" src="https://raw.githubusercontent.com/andreabenini/PCBen/master/logo.png" alt="">
+                    </div>
+                </a>
+                &nbsp;
+            </div>
+        </div> <!-- Page Content -->
+
     <!-- Footer -->
     <footer class="py-1 bg-dark">
         <div class="container">
@@ -106,9 +130,5 @@
             <p class="m-0 text-right text-white footerLabel">Andrea Benini 2019</p>
         </div>
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="/res/jquery/jquery.min.js"></script>
-    <script src="/res/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

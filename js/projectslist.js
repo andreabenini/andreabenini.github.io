@@ -163,7 +163,8 @@ function CarouselCreate(Projects) {
             } else {
                 divInner.setAttribute("class", "carousel-item");
             }
-            divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); text-shadow: 1px 1px #0039ff");
+            divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); "+
+                                           "background-size: cover; text-shadow: 1px 1px #0039ff");
             div.appendChild(divInner);
             count++;
         }
