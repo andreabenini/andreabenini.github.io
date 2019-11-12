@@ -44,7 +44,7 @@ function DisplayTable(Projects, Table) {
         if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
             Link = Projects[i].homepage;
         }
-        var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Link+"' target=_blank>"+Projects[i].name+"</a>";
+        var CellName        = Row.insertCell(0);  CellName.innerHTML        = "<a href='"+Link+"'>"+Projects[i].name+"</a>";
         var CellFork        = Row.insertCell(1);  CellFork.innerHTML        = Projects[i].fork? ".": "";
         var CellDescription = Row.insertCell(2);  CellDescription.innerHTML = Projects[i].description;
         var CellUpdated     = Row.insertCell(3);  CellUpdated.innerHTML     = formatDate(Projects[i].updated_at)+"&nbsp;&nbsp;"; CellUpdated.style.whiteSpace = 'nowrap';
@@ -169,17 +169,17 @@ function CarouselCreate(Projects) {
             }
             divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); "+
                                            "background-size: cover; text-shadow: 1px 1px #0039ff");
-            // div.appendChild(divInner);
+            div.appendChild(divInner);
 
-            // Create hyperlink
-            let link = document.createElement('a');
-            let url  = Projects[i].html_url;
-            if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
-                url = Projects[i].homepage;
-            }
-            link.setAttribute('href', url);
-            link.appendChild(divInner);
-            div.appendChild(link);
+            // // Create hyperlink
+            // let link = document.createElement('a');
+            // let url  = Projects[i].html_url;
+            // if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
+            //     url = Projects[i].homepage;
+            // }
+            // link.setAttribute('href', url);
+            // link.appendChild(divInner);
+            // div.appendChild(link);
 
             //
             count++;
