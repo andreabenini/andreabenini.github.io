@@ -1,4 +1,12 @@
-# andreabenini.github.io
+Update your links to:
+
+---
+# [andreabenini.github.io](http://andreabenini.github.io)
+---
+
+Visit my repositories and projects on [andreabenini.github.io](http://andreabenini.github.io)
+
+---
 
 To write me a message you can:
 - Mail me. At https://github.com/andreabenini, under my avatar you can quickly obtain my email address if you take a look at it
@@ -6,5 +14,5 @@ To write me a message you can:
 - [![Gitter](https://badges.gitter.im/andreabenini/community.svg)](https://gitter.im/andreabenini/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Use my personal chat server where can leave me a public or private message
 
-Or you can use my public chat. You need to be logged (github, gitlab, twitter, ...) to use it
+To chat with me use this. You need to be logged (github, gitlab, twitter, ...) to use it
 - https://gitter.im/andreabenini/community
