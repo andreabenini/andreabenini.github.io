@@ -183,3 +183,15 @@ function CarouselCreate(Projects) {
         }
     }
 } /**/
+
+function animation(Toggle) {
+    if (Toggle) {
+        document.getElementById("bubble-boxes").style.display = "block";
+        document.getElementById("animation").href = "javascript:animation(false);"
+        document.getElementById("animation").text = "Disable CSS Animation";
+    } else {
+        document.getElementById("bubble-boxes").style.display = "none";
+        document.getElementById("animation").href = "javascript:animation(true);"
+        document.getElementById("animation").text = "Enable CSS Animation";
+    }
+} /**/
