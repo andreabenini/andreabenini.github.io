@@ -2,6 +2,10 @@ a {
     color: #001be8;
 }
 
+.active {
+    cursor: pointer;
+}
+
 #projectListTable {
     margin: 0 auto;
 }

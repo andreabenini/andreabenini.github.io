@@ -167,19 +167,16 @@ function CarouselCreate(Projects) {
             } else {
                 divInner.setAttribute("class", "carousel-item");
             }
+            // carousel hyperlink
+            let Link = Projects[i].html_url;
+            if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
+                Link = Projects[i].homepage;
+            }
+            divInner.setAttribute("onclick", "window.location='"+Link+"';");
+            // background
             divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); "+
                                            "background-size: cover; text-shadow: 1px 1px #0039ff");
             div.appendChild(divInner);
-
-            // // Create hyperlink
-            // let link = document.createElement('a');
-            // let url  = Projects[i].html_url;
-            // if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
-            //     url = Projects[i].homepage;
-            // }
-            // link.setAttribute('href', url);
-            // link.appendChild(divInner);
-            // div.appendChild(link);
 
             //
             count++;
