@@ -144,7 +144,6 @@ function CarouselCreate(Projects) {
     let randomStart = Math.floor(Math.random() * Projects.length);
     for (let i=0; i<Projects.length; i++) {
         let current = i+randomStart >= Projects.length ? i+randomStart-Projects.length: i+randomStart;
-        console.log("Current: "+current);
         if (!Projects[current].fork) {
             // Carousel OL          // <li data-target="" data-slide-to="1" class="active"></li>
             let li = document.createElement("li");
