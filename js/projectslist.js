@@ -141,8 +141,11 @@ function CarouselCreate(Projects) {
     let ol  = document.getElementById("carousel_ol");
     let div = document.getElementById("carousel_div");
     let count = 0;
+    let randomStart = Math.floor(Math.random() * Projects.length);
     for (let i=0; i<Projects.length; i++) {
-        if (!Projects[i].fork) {
+        let current = i+randomStart >= Projects.length ? i+randomStart-Projects.length: i+randomStart;
+        console.log("Current: "+current);
+        if (!Projects[current].fork) {
             // Carousel OL          // <li data-target="" data-slide-to="1" class="active"></li>
             let li = document.createElement("li");
             li.appendChild(document.createTextNode(""));
@@ -158,9 +161,9 @@ function CarouselCreate(Projects) {
             // carousel DIV
             let divInner = document.createElement("div");
             divInner.innerHTML = "<div class='carousel-caption d-none d-md-block'><h3>"+
-                                    Projects[i].name +
+                                    Projects[current].name +
                                  "</h3><p>"+
-                                    Projects[i].description +
+                                    Projects[current].description +
                                  "</p></div>";
             if (count==0) {
                 divInner.setAttribute("class", "carousel-item active");
@@ -168,16 +171,15 @@ function CarouselCreate(Projects) {
                 divInner.setAttribute("class", "carousel-item");
             }
             // carousel hyperlink
-            let Link = Projects[i].html_url;
-            if (!Projects[i].fork && Projects[i].homepage!="" && Projects[i].homepage!=null) {
-                Link = Projects[i].homepage;
+            let Link = Projects[current].html_url;
+            if (!Projects[current].fork && Projects[current].homepage!="" && Projects[current].homepage!=null) {
+                Link = Projects[current].homepage;
             }
             divInner.setAttribute("onclick", "window.location='"+Link+"';");
             // background
-            divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[i].name + "/master/logo.png'); "+
+            divInner.setAttribute("style", "background-image: url('https://raw.githubusercontent.com/andreabenini/" + Projects[current].name + "/master/logo.png'); "+
                                            "background-size: cover; text-shadow: 1px 1px #0039ff");
             div.appendChild(divInner);
-
             //
             count++;
         }
