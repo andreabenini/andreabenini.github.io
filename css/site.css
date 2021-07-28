@@ -2,6 +2,10 @@ a {
     color: #001be8;
 }
 
+.calendar {
+    width: 900px;
+}
+
 .active {
     cursor: pointer;
 }
