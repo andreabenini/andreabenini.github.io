@@ -7,20 +7,17 @@
     <meta name="description" content="Ben's website">
     <script src="/js/marked.js"></script>                                   <!-- Markdown renderer -->
     <script src="/js/github-calendar.min.js"></script>                      <!-- github calendar -->
-    <link rel="stylesheet" href="/css/site.css" />
-    <link rel="stylesheet" href="/css/github-calendar.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="/res/bootstrap/css/bootstrap.min.css"   rel="stylesheet">   <!-- Bootstrap core CSS             -->
     <link href="/res/fontawesome/css/all.min.css"       rel="stylesheet">   <!-- FontAwesome                    -->
     <link href="/theme/res/css/modern-business.css"     rel="stylesheet">   <!-- Custom styles for this theme   -->
     <link href="/theme/res/css/theme.css"               rel="stylesheet">   <!-- Current theme css              -->
+    <link href="/css/github-calendar-responsive.css"    rel="stylesheet"/>
+    <link href="/css/site.css"                          rel="stylesheet">
 
     <script src="/res/jquery/jquery.min.js"></script>                       <!-- jquery                         -->
     <script src="/res/bootstrap/js/bootstrap.bundle.min.js"></script>       <!-- Bootstrap                      -->
-    <!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
-    <!--<link rel="stylesheet" href="./css/github-calendar-responsive.css" />-->
-    <link href="/css/site.css" rel="stylesheet">
 
     <!-- Projects list -->
     <script src="/js/projectslist.js"></script>
@@ -99,7 +96,7 @@
         <div class="row">
             <div class="col-lg-12 mb-12">
                 <div class="calendar"></div>
-                <script>GitHubCalendar(".calendar", "andreabenini");</script>
+                <script>GitHubCalendar(".calendar", "andreabenini", { responsive: true });</script>
             </div>
         </div>
         <!-- /activity -->
@@ -135,7 +132,8 @@
     <!-- Footer -->
     <footer class="py-1 bg-dark">
         <div class="container">
-            <p class="m-0 text-right text-white footerLabel">Andrea Benini 2024</p>
+            
+            <p class="m-0 text-right text-white footerLabel">Andrea Benini 2025</p>
         </div>
     </footer>
 </body>
