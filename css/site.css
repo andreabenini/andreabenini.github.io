@@ -2,9 +2,18 @@ a {
     color: #001be8;
 }
 
+/* Calendar widget */
 .calendar {
-    width: 900px;
+    width: 1200px;
+    border: none;
 }
+td.ContributionCalendar-label span[aria-hidden='true'] {
+    left: 1pt;
+}
+table.ContributionCalendar-grid {
+    border-collapse: unset;
+} /**/
+
 
 .active {
     cursor: pointer;
